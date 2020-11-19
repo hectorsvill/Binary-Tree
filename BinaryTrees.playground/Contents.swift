@@ -22,18 +22,18 @@ class Node {
     }
     
     var height: Int {
-        return getHeigh(self)
+        return getHeight(self)
     }
     
-    private func getHeigh(_ node: Node?) -> Int {
+    private func getHeight(_ node: Node?) -> Int {
         var leftTotal = 0
         var rightTotal = 0
         
         if node == nil {
             return 0
         } else {
-            leftTotal = getHeigh(node?.left)
-            rightTotal = getHeigh(node?.right)
+            leftTotal = getHeight(node?.left)
+            rightTotal = getHeight(node?.right)
             
             if leftTotal >  rightTotal {
                 return leftTotal + 1
