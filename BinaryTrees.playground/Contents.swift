@@ -28,6 +28,14 @@ class Node {
         }
     }
     
+    var leafCount: Int {
+        if left == nil && right == nil {
+            return 1
+        } else {
+            return (left?.leafCount ?? 0) + (right?.leafCount ?? 0)
+        }
+    }
+    
     func contains(_ item: Int) -> Bool {
         if value == item {
             return true
@@ -48,7 +56,6 @@ class Node {
         right?.printInOrder()
     }
 }
-
 let root = Node(value: 0)
 let left = Node(value: 1)
 let right = Node(value: 2)
@@ -77,5 +84,8 @@ XCTAssertEqual(root.height, targetHeight, "root.height != \(targetHeight)")
 let targetNumber = 10
 XCTAssertEqual(root.contains(10), true, "root.contains != \(targetNumber)")
 
+let targetLeafCount = 4
+XCTAssertEqual(root.leafCount, 4, "root.leafCount != \(targetLeafCount)")
+
 //root.printInOrder()
-root.printPostOrder()
+//root.printPostOrder()
