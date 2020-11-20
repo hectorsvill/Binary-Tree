@@ -1,4 +1,5 @@
 import Foundation
+import XCTest
 
 class Node {
     var value: Int
@@ -40,6 +41,12 @@ class Node {
         right?.printInOrder()
         left?.printInOrder()
     }
+    
+    func printPostOrder() {
+        print(value)
+        left?.printInOrder()
+        right?.printInOrder()
+    }
 }
 
 let root = Node(value: 0)
@@ -47,13 +54,28 @@ let left = Node(value: 1)
 let right = Node(value: 2)
 root.right = right
 root.left = left
+
+root.left?.left = Node(value: 5)
+root.left?.left?.right = Node(value: 7)
+
+root.left?.left?.right?.left = Node(value: 8)
+root.left?.left?.right?.right = Node(value: 9)
+root.left?.left?.right?.right?.right = Node(value: 10)
+
 right.left = Node(value: 3)
 right.right = Node(value: 4)
 right.right?.right = Node(value: 6)
 
-print("sum: \(root.sum)")
-print("height: \(root.height)")
-let value = 3
-print("contains \(value) \(root.contains(value))")
-root.printInOrder()
 
+let targetSum = 55
+XCTAssertEqual(root.sum, targetSum, "root.sum != \(targetSum)")
+
+
+let targetHeight = 6
+XCTAssertEqual(root.height, targetHeight, "root.height != \(targetHeight)")
+
+let targetNumber = 10
+XCTAssertEqual(root.contains(10), true, "root.contains != \(targetNumber)")
+
+//root.printInOrder()
+root.printPostOrder()
