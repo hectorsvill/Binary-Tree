@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 class Node {
     var value: Int
@@ -10,37 +10,35 @@ class Node {
     }
     
     var sum: Int {
-        return getSum(self)
-    }
-    
-    private func getSum(_ node: Node?) -> Int {
-        if node == nil {
-            return 0
-        } else {
-            return node!.value + getSum(node?.left) + getSum(node?.right)
-        }
+        return value + (right?.sum ?? 0) + (left?.sum ?? 0)
     }
     
     var height: Int {
-        return getHeight(self)
-    }
-    
-    private func getHeight(_ node: Node?) -> Int {
         var leftTotal = 0
         var rightTotal = 0
         
-        if node == nil {
-            return 0
+        leftTotal = (left?.height ?? 0)
+        rightTotal = (right?.height ?? 0)
+        
+        if leftTotal > rightTotal {
+            return leftTotal + 1
         } else {
-            leftTotal = getHeight(node?.left)
-            rightTotal = getHeight(node?.right)
-            
-            if leftTotal >  rightTotal {
-                return leftTotal + 1
-            } else {
-                return rightTotal + 1
-            }
+            return rightTotal + 1
         }
+    }
+    
+    func contains(_ item: Int) -> Bool {
+        if value == item {
+            return true
+        }
+        
+        return right?.contains(item) ?? false || left?.contains(item) ?? false
+    }
+    
+    func printInOrder() {
+        print(value)
+        right?.printInOrder()
+        left?.printInOrder()
     }
 }
 
@@ -55,3 +53,7 @@ right.right?.right = Node(value: 6)
 
 print("sum: \(root.sum)")
 print("height: \(root.height)")
+let value = 3
+print("contains \(value) \(root.contains(value))")
+root.printInOrder()
+
