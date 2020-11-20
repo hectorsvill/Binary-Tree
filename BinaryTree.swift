@@ -1,5 +1,12 @@
 import Foundation
-import XCTest
+
+func XCTAssertEqual<T: Comparable>(_ a: T, _ b: T, _ message: String) {
+    if a == b {
+        print(a)
+    } else {
+        fatalError(message)
+    }
+}
 
 class Node {
     var value: Int
@@ -82,10 +89,10 @@ let targetHeight = 6
 XCTAssertEqual(root.height, targetHeight, "root.height != \(targetHeight)")
 
 let targetNumber = 10
-XCTAssertEqual(root.contains(10), true, "root.contains != \(targetNumber)")
+print(root.contains(10))
 
 let targetLeafCount = 4
-XCTAssertEqual(root.leafCount, 4, "root.leafCount != \(targetLeafCount)")
+XCTAssertEqual(root.leafCount, targetLeafCount, "root.leafCount != \(targetLeafCount)")
 
 //root.printInOrder()
 //root.printPostOrder()
