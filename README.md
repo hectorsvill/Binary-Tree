@@ -1,5 +1,5 @@
-# Binary-Trees
-Practice Binary Trees and challenges 
+# Binary-Tree
+
 #
 
 ```swift
